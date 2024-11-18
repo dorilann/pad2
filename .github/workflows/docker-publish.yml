@@ -2,9 +2,9 @@ name: CI/CD for Docker Images with Health Check
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build_and_push:
