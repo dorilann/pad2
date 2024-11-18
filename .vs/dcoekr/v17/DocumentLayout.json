@@ -1,7 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\almo2\\pad2\\dcoekr\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\almo2\\pad2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{841471E4-ADC2-4DC4-B666-E4BC1ECA9377}|RiotService\\RiotService.csproj|c:\\users\\almo2\\pad2\\riotservice\\riotservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{841471E4-ADC2-4DC4-B666-E4BC1ECA9377}|RiotService\\RiotService.csproj|solutionrelative:riotservice\\riotservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RiotService",
+              "DocumentMoniker": "C:\\Users\\almo2\\pad2\\RiotService\\RiotService.csproj",
+              "RelativeDocumentMoniker": "RiotService\\RiotService.csproj",
+              "ToolTip": "C:\\Users\\almo2\\pad2\\RiotService\\RiotService.csproj",
+              "RelativeToolTip": "RiotService\\RiotService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-18T14:23:30.447Z",
+              "EditorCaption": ""
             }
           ]
         }
