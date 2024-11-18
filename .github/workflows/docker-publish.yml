@@ -1,0 +1,106 @@
+name: CI/CD for Docker Images with Health Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build riotservice
+        run: |
+          docker build -t dorilann/riotservice:latest ./RiotService
+
+      - name: Run riotservice and check health
+        run: |
+          docker run -d -p 8000:8080 --name riotservice dorilann/riotservice:latest
+          sleep 10  
+          until curl --retry 5 --retry-connrefused --retry-delay 5 --fail http://localhost:8000/Health/HealthCheck; do
+            echo "Waiting for riotservice to be ready..."
+            sleep 5
+          done
+
+      - name: Push riotservice
+        run: |
+          docker push dorilann/riotservice:latest
+
+      - name: Build storageservice
+        run: |
+          docker build -t dorilann/storageservice:latest ./StorageService
+
+      - name: Run storageservice and check health
+        run: |
+          docker run -d -p 8001:8080 --name storageservice dorilann/storageservice:latest
+          sleep 10 
+          until curl --retry 5 --retry-connrefused --retry-delay 5 --fail http://localhost:8001/Health/HealthCheck; do
+            echo "Waiting for storageservice to be ready..."
+            sleep 5
+          done
+
+      - name: Push storageservice
+        run: |
+          docker push dorilann/storageservice:latest
+
+      - name: Build apigateway
+        run: |
+          docker build -t dorilann/apigateway:latest ./ApiGateway
+
+      - name: Run apigateway and check health
+        run: |
+          docker run -d -p 8002:8080 --name apigateway dorilann/apigateway:latest
+          sleep 10 
+          until curl --retry 5 --retry-connrefused --retry-delay 5 --fail http://localhost:8002/Health/HealthCheck; do
+            echo "Waiting for apigateway to be ready..."
+            sleep 5
+          done
+
+      - name: Push apigateway
+        run: |
+          docker push dorilann/apigateway:latest
+
+      - name: Build frontend
+        run: |
+          docker build -t dorilann/frontend:latest ./frontend
+
+      - name: Run frontend and check health
+        run: |
+          docker run -d -p 3000:3000 --name frontend dorilann/frontend:latest
+          sleep 10 
+          until curl --retry 5 --retry-connrefused --retry-delay 5 --fail http://localhost:3000; do
+            echo "Waiting for frontend to be ready..."
+            sleep 5
+          done
+
+      - name: Push frontend
+        run: |
+          docker push dorilann/frontend:latest  
+
+      - name: Build authorizationservice
+        run: |
+          docker build -t dorilann/authorizationservice:latest ./AuthorizationService
+
+      - name: Run authorizationservice and check health
+        run: |
+          docker run -d -p 8003:8080 --name authorizationservice dorilann/authorizationservice:latest
+          sleep 10 
+          until curl --retry 5 --retry-connrefused --retry-delay 5 --fail http://localhost:8003/Health/HealthCheck; do
+            echo "Waiting for authorizationservice to be ready..."
+            sleep 5
+          done
+
+      - name: Push authorizationservice
+        run: |
+          docker push dorilann/authorizationservice:latest
