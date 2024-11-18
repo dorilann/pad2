@@ -1,0 +1,18 @@
+.mastery-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mastery-card .champion-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border-radius: 50%;
+  }
+  
